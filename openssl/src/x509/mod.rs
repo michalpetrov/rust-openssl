@@ -735,6 +735,10 @@ impl X509Req {
             Ok(X509Req::from_ptr(handle))
         }
     }
+          
+    pub fn text() {
+        println!("test");
+    }
 
     from_der!(X509Req, ffi::d2i_X509_REQ);
 }
