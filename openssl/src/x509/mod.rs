@@ -735,9 +735,12 @@ impl X509Req {
             Ok(X509Req::from_ptr(handle))
         }
     }
-          
-    pub fn text() {
-        println!("test");
+
+    pub fn public_key(&self) -> Result<PKey, ErrorStack> {
+        unsafe {
+            let pkey = cvt_p(ffi::X509_REQ_get_pubkey(self.as_ptr()))?;
+            Ok(PKey::from_ptr(pkey))
+        }
     }
 
     from_der!(X509Req, ffi::d2i_X509_REQ);
